@@ -11,3 +11,12 @@ body {
 .bg-sidebar {
     background-color: #0775A0;
 }
+
+a {
+    color: #074E79;
+    font-weight: bold;
+}
+
+.btn-primary {
+    background-color: #074E79;    
+}
