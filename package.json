@@ -1,0 +1,30 @@
+{
+  "name": "Appointment-Scheduler",
+  "version": "1.0.0",
+  "description": "the main purpose of this system is to schedule a meeting between client and developer",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "dev": "npx nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/casibanryan/Appointment-Scheduler.git"
+  },
+  "keywords": [],
+  "author": "Resty Ochea",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/casibanryan/Appointment-Scheduler/issues"
+  },
+  "homepage": "https://github.com/casibanryan/Appointment-Scheduler#readme",
+  "dependencies": {
+    "ejs": "^3.1.8",
+    "express": "^4.18.1",
+    "mysql": "^2.18.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.16"
+  }
+}
