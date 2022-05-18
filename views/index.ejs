@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Appointment System</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- bootstrap cdn-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <!--font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- font awesome cdn -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+    <!-- customize css-->
+    <link rel="stylesheet" href="css/customize.css">
+    <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body>
+
+    <!-- sidebar-->
+    <div class="row">
+        <div class="col-sm-auto bg-sidebar sticky-top pe-0">
+            <div class="d-flex flex-sm-column flex-row flex-nowrap bg-sidebar sticky-top pe-0">
+            <%- include('components/nav'); %>
+            </div>
+        </div>
+        <div class="col-sm px-3 min-vh-100 bg-light">
+            <header class="border-bottom" style='padding-bottom: 3.4rem'>
+                <p class="fw-bold float-end text-muted p-3">Welcome, Resty Ochea</p>
+            </header>
+
+            <!-- content -->
+            <div class="container-fluid">
+                <div class="d-flex justify-content-between my-3">
+                    <h3 class="fw-bold">
+                        Schedule Clients
+                    </h3>
+                    <span class="">
+                        <a href="#" class="btn btn-primary"><i class="bi bi-plus-lg me-2"></i>New Appointment</a>
+                    </span>
+                </div>
+              
+
+           
+                
+                <div class="event-schedule-area-two bg-color pad100">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <ul class="nav custom-tab" id="myTab" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link active show" id="sunday" data-toggle="tab" href="#sunday" role="tab"
+                                            aria-controls="home" aria-selected="true">Sunday</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="monday" data-toggle="tab" href="#monday" role="tab"
+                                            aria-controls="monday" aria-selected="false">Monday</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="tuesday" data-toggle="tab" href="#tuesday" role="tab"
+                                            aria-controls="tuesday" aria-selected="false">Tuesday</a>
+                                    </li>
+                                    <li class="nav-item d-none d-lg-block">
+                                        <a class="nav-link" id="wednesday" data-toggle="tab" href="#wednesday" role="tab"
+                                            aria-controls="wednesday" aria-selected="false">Wednesday</a>
+                                    </li>
+                                    <li class="nav-item mr-0 d-none d-lg-block">
+                                        <a class="nav-link" id="thursday" data-toggle="tab" href="#thursday" role="tab"
+                                            aria-controls="thursday" aria-selected="false">Thursday</a>
+                                    </li>
+                                    <li class="nav-item mr-0 d-none d-lg-block">
+                                        <a class="nav-link" id="friday" data-toggle="tab" href="#friday" role="tab" aria-controls="friday"
+                                            aria-selected="false">Friday</a>
+                                    </li>
+                                    <li class="nav-item mr-0 d-none d-lg-block">
+                                        <a class="nav-link" id="saturday" data-toggle="tab" href="#saturday" role="tab" aria-controls="saturday"
+                                            aria-selected="false">Saturday</a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content" id="myTabContent">
+                                    <div class="tab-pane fade active show" id="sunday" role="tabpanel">
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="text-center" scope="col">Date</th>
+                                                        <th scope="col">Developer</th>
+                                                        <th scope="col">Client</th>
+                                                        <th scope="col">Venue</th>
+                                                        <th class="text-center" scope="col"></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr class="inner-box">
+                                                        <th scope="row">
+                                                            <div class="event-date">
+                                                                <span>16</span>
+                                                                <p>November</p>
+                                                            </div>
+                                                        </th>
+                                                        <td>
+                                                            <div class="event-img">
+                                                                <img src="images/developer/resty.png" alt="resty-developer" />
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="event-wrap">
+                                                                <h3><a href="client_details.html"> Mike ben Delos</a></h3>
+                                                                <div class="meta">
+                                                                    <div class="organizers">
+                                                                        <a href="#" class="text-decoration-none" >Cebu pacific</a>
+                                                                    </div>
+                                                                    <div class="categories">
+                                                                        <a href="#" class="text-decoration-none">Software</a>
+                                                                    </div>
+                                                                    <div class="time">
+                                                                        <span>05:35 AM - 08:00 AM 2h 25'</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="r-no">
+                                                                <span>Room B3</span>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="primary-btn">
+                                                                <a class="btn btn-primary" href="client_details.html">Read More</a>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                               
+                                </div>
+                                <div class="primary-btn text-center">
+                                    <a href="#" class="btn btn-primary"><i class="bi bi-download fw-bold me-2"></i>Download Schedule</a>
+                                </div>
+                            </div>
+                            <!-- /col end-->
+                        </div>
+                        <!-- /row end-->
+                    </div>
+                </div>
+
+
+            </div>
+            <!-- end of content-->
+        </div>
+    </div>
+
+    <!-- scrips-->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
+        integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js"
+        integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy"
+        crossorigin="anonymous"></script>
+    <script src="js/index.js"></script>
+</body>
+
+</html>
