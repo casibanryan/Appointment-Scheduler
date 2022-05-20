@@ -24,7 +24,7 @@ app.get("/client-details", (req, res) => {
 /* Telling the server to use the public folder as the static folder. */
 app.use(express.static("public"));
 
-const port = 8080;
+const port = 8888;
 
 /* Telling the server to listen on port 8080. */
 app.listen(port, () => {

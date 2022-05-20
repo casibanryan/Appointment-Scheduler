@@ -29,7 +29,7 @@
     <!-- sidebar-->
     <div class="row">
         
-            <%- include('components/nav') %>
+            <%- include('components/sidebar') %>
           
         <div class="col-sm px-3 min-vh-100 bg-light">
             <header class="border-bottom" style='padding-bottom: 3.4rem'>
@@ -54,36 +54,36 @@
                             <div class="col-lg-12">
                                 <ul class="nav custom-tab" id="myTab" role="tablist">
                                     <li class="nav-item">
-                                        <a class="nav-link active show" id="sunday" data-toggle="tab" href="#sunday" role="tab"
-                                            aria-controls="home" aria-selected="true">Sunday</a>
+                                        <a class="nav-link active show" id="sunday" data-bs-toggle="tab" role="tab" type="button"
+                                            aria-controls="home" aria-selected="true" data-bs-target="#sunday">Sunday</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" id="monday" data-toggle="tab" href="#monday" role="tab"
+                                        <a class="nav-link" id="monday" data-bs-toggle="tab" data-bs-target="#monday" role="tab" type="button"
                                             aria-controls="monday" aria-selected="false">Monday</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" id="tuesday" data-toggle="tab" href="#tuesday" role="tab"
+                                        <a class="nav-link" id="tuesday" data-bs-toggle="tab" data-bs-target="#tuesday" type="button" role="tab"
                                             aria-controls="tuesday" aria-selected="false">Tuesday</a>
                                     </li>
                                     <li class="nav-item d-none d-lg-block">
-                                        <a class="nav-link" id="wednesday" data-toggle="tab" href="#wednesday" role="tab"
+                                        <a class="nav-link" id="wednesday" data-bs-toggle="tab" data-bs-target="#wednesday" role="tab"
                                             aria-controls="wednesday" aria-selected="false">Wednesday</a>
                                     </li>
                                     <li class="nav-item mr-0 d-none d-lg-block">
-                                        <a class="nav-link" id="thursday" data-toggle="tab" href="#thursday" role="tab"
+                                        <a class="nav-link" id="thursday" data-bs-toggle="tab" type="button" data-bs-target="#thursday" role="tab"
                                             aria-controls="thursday" aria-selected="false">Thursday</a>
                                     </li>
                                     <li class="nav-item mr-0 d-none d-lg-block">
-                                        <a class="nav-link" id="friday" data-toggle="tab" href="#friday" role="tab" aria-controls="friday"
+                                        <a class="nav-link" id="friday" data-bs-toggle="tab" type="button" data-bs-target="#friday" role="tab" aria-controls="friday"
                                             aria-selected="false">Friday</a>
                                     </li>
                                     <li class="nav-item mr-0 d-none d-lg-block">
-                                        <a class="nav-link" id="saturday" data-toggle="tab" href="#saturday" role="tab" aria-controls="saturday"
+                                        <a class="nav-link" id="saturday" data-bs-toggle="tab" type="button" data-bs-target="#saturday" role="tab" aria-controls="saturday"
                                             aria-selected="false">Saturday</a>
                                     </li>
                                 </ul>
                                 <div class="tab-content" id="myTabContent">
-                                    <div class="tab-pane fade active show" id="sunday" role="tabpanel">
+                                    <div class="tab-pane fade active show" id="sunday" role="tabpanel" tabindex="0">
                                         <div class="table-responsive">
                                             <table class="table">
                                                 <thead>
@@ -139,10 +139,7 @@
                                             </table>
                                         </div>
                                     </div>
-                               
-                                </div>
-                                <div class="primary-btn text-center">
-                                    <a href="#" class="btn btn-primary"><i class="bi bi-download fw-bold me-2"></i>Download Schedule</a>
+
                                 </div>
                             </div>
                             <!-- /col end-->
@@ -158,16 +155,20 @@
     </div>
 
     <!-- modal area-->
-    <div class="modal fade" id="new_appointment" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="new_appointmentLabel" aria-hidden="true">
-        <div class="modal-dialog">
+    <div class="modal fade" id="new_appointment"  aria-labelledby="new_appointmentLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="new_appointmentLabel">New appointment</h5>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body px-5">
                     <form class="row needs-validation" novalidate>
+                        <!-- client-->
                         <div class="mb-3">
-                            <label for="client" class="form-label"><i class="bi bi-person"></i> Client </label>
+                            <label for="client" class="form-label">
+                                <i class="bi bi-person pe-1"></i>
+                                 Client
+                            </label>
                            <select name="client" id="client" class="form-select" required>
                                 <option selected disabled value="">select a client </option>
                                 <option value="1">One</option>
@@ -179,10 +180,15 @@
                                Select a client!
                            </div>
                         </div>
+                        <!-- end of client-->
 
+                        <!-- developer-->
                         <div class="mb-3">
-                            <label for="client" class="form-label"> Developer </label>
-                            <select name="client" id="client" class="form-select" required>
+                            <label for="developer" class="form-label">
+                                <i class="bi bi-person-workspace pe-1"></i>
+                                 Developer 
+                            </label>
+                            <select name="client" id="developer" class="form-select" required>
                                 <option selected disabled value="">select a developer </option>
                                 <option value="1">One</option>
                             </select>
@@ -193,17 +199,151 @@
                                 Select a developer!
                             </div>
                         </div>
-                      
+                        <!-- developers-->
+
+                        <!-- venue-->
+                        <div class="mb-3">
+                            <label for="venue" class="form-label">
+                            <i class="bi bi-shop-window pe-1"></i>
+                                Venue
+                            </label>
+                            <select name="venue" id="venue" class="form-select" required>
+                                <option selected disabled value="">select a venue </option>
+                                <option value="1">One</option>
+                            </select>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                            <div class="invalid-feedback">
+                                Select a venue!
+                            </div>
+                        </div>
+                        <!-- end of venue-->
+
+                        <!-- categories -->
+                        <div class="mb-3">
+                            <label for="category" class="form-label">
+                                <i class="bi bi-tags pe-1"></i>
+                                Category
+                            </label>
+                            <select name="category" id="category" class="form-select" required>
+                                <option selected disabled value="">select a category </option>
+                                <option value="1">One</option>
+                            </select>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                            <div class="invalid-feedback">
+                                Select a category!
+                            </div>
+                        </div>
+                        <!-- end of categories-->
+
+                        <!-- organization -->
+                        <div class="mb-3">
+                            <label for="organization" class="form-label">
+                                <i class="fa fa-building-o pe-1" aria-hidden="true"></i>
+                                Organization / Company
+                            </label>
+                            <input type="text" id="organization" class="form-control" placeholder="* if none leave blank">
+                        </div>
+                        <!-- end of organization -->
+
+                        <!-- reason for appointment-->
+                        <div class="mb-3">
+                            <label for="reason" class="form-label">
+                                <i class="bi bi-pin pe-1"></i>
+                                Reason for appointment
+                            </label>
+                            <textarea name="reason" id="reason" class="form-control" cols="30" rows="3" required></textarea>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                            <div class="invalid-feedback">
+                                Enter a reason for appointment
+                            </div>
+                        </div>
+                        <!-- end of reason for appointment-->
+
+                        <!-- additional comments -->
+                        <div class="mb-3">
+                            <label for="comment" class="form-label">
+                                <i class="bi bi-chat-left-dots"></i>
+                                 Additional Comments
+                            </label>
+                            <textarea name="reason" id="comment" class="form-control" cols="30" rows="3" required></textarea>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                            <div class="invalid-feedback">
+                                Enter additional comments
+                            </div>
+                        </div>
+                        <!-- end of additional comments-->
+
+                        <!-- date of appointment-->
+                        <div class="mb-3">
+                            <label for="date" class="form-label">
+                                <i class="fa fa-calendar pe-1" aria-hidden="true"></i>
+                                Date of Appointment
+                            </label>
+                            <input type="date" id="date" required class="form-control">
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                            <div class="invalid-feedback">
+                                Select a date of appointment!
+                            </div>
+                        </div>
+                        <!-- end of date of appointment-->
+                        
+                        <!-- time of appointment -->
+                        <div class="mb-3">
+                            <label for="time" class="form-label">
+                            <i class="fa fa-clock-o pe-1" aria-hidden="true"></i>
+                                Time of Appointment
+                            </label>
+                            <input type="time" class="form-control" id="time" required>
+
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                            <div class="invalid-feedback">
+                                Select a time of appointment!
+                            </div>
+                        </div>
+
+                        <!-- choose a reminder -->
+                        <div class="mb-3 d-flex">
+                                <label for="" class="form-label me-4">
+                                    <i class="fa fa-bell-o pe-1" aria-hidden="true"></i>
+                                    Send Reminder
+                                </label>
+                            <div class="form-check me-3">
+                                <input class="form-check-input" type="checkbox" value="" name="reminder" id="sms">
+                                <label class="form-check-label" for="sms">
+                                    SMS
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" name="reminder" id="email" >
+                                <label class="form-check-label" for="email">
+                                    Email
+                                </label>
+                            </div>
+                        </div>
+
 
                     </div>
                 <div class="modal-footer justify-content-center">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Set</button>
+                    <button type="submit" class="btn btn-primary text-uppercase px-3"><i class="bi bi-calendar2-event me-1"></i> Set</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+
     <!-- scrips-->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
         integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk"
