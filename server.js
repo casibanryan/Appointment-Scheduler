@@ -1,9 +1,5 @@
 const express = require("express");
 const app = express();
-
-// setting to make ejs as view engine
-app.set("view engine", "ejs");
-
 // routes
 app.get("/", (req, res) => {
   res.render("index.ejs");
