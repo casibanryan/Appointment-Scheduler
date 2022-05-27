@@ -1,24 +1,18 @@
+// library
+const body_parser = require("body-parser");
 const express = require("express");
 const app = express();
-// routes
-app.get("/", (req, res) => {
-  res.render("index.ejs");
-});
 
-app.get("/new-client", (req, res) => {
-  res.render("new_client.ejs");
-});
+// set view engine
+app.set("view engine", "ejs");
 
-app.get("/manage-clients", (reg, res) => {
-  res.render("manage_clients.ejs");
-});
+// middlewares
+app.use(express.static(__dirname + "/public"));
+app.use(body_parser.urlencoded({ extended: false }));
+app.use(body_parser.json());
 
-app.get("/client-details", (req, res) => {
-  res.render("client_details.ejs");
-});
-
-/* Telling the server to use the public folder as the static folder. */
-app.use(express.static("public"));
+// load routes
+app.use("/", require("./routes/route"));
 
 const port = 8888;
 

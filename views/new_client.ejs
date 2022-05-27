@@ -1,39 +1,154 @@
-<!doctype html>
-<html lang="en">
-
-<head>
-    <title>Appointment System</title>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- bootstrap cdn-->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-    <!--font-->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
-        rel="stylesheet">
-    <!-- customize css-->
-    <link rel="stylesheet" href="css/customize.css">
-</head>
-
-<body>
-
+<%- include('components/head') %>
+    
     <!-- sidebar-->
     <div class="row">
             <%- include('components/sidebar') %>
         <div class="col-sm px-3 min-vh-100 bg-light">
             <header class="border-bottom" style='padding-bottom: 3.4rem'>
-                <p class="fw-bold float-end text-muted p-3">Welcome, Resty Ochea</p>
+                <p class="fw-bold float-end text-muted p-3">Welcome, Admin</p>
             </header>
 
-            <!-- content -->
+            <!-- content -->    
             <div class="container-fluid">
-                <h3 class="my-3 fw-bold ">New Client</h3>
+                <h3 class="mt-3 mb-5 fw-bold ">New Client</h3>
+                <div class="container bg-white">
+                    <form action="/new-client" method="POST" class="row g-3 needs-validation pb-3" novalidate>
+                        <div class="col-md-4 mb-3">
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="name" name="name" required>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                            <div class="invalid-feedback">
+                                Please Enter your name!
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="birthday" class="form-label">Birth Date</label>
+                            <input type="date" class="form-control" id="birthday" name="birthdate" required>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                            <div class="invalid-feedback">
+                                Please Enter your birthdate!
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="gender" class="form-label">Gender</label>
+                            <select class="form-select" id="gender" name="gender" required>
+                                <option selected disabled value="">Choose...</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="others">Other's</option>
+                            </select>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                            <div class="invalid-feedback">
+                                Please select a gender!
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 mb-3">
+                            <label for="address" class="form-label">Address</label>
+                            <input type="text" class="form-control" id="address" name="address" required>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                            <div class="invalid-feedback">
+                                Please Enter your address!
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="province" class="form-label">Province</label>
+                            <input type="text" class="form-control" id="province" name="province" required>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                            <div class="invalid-feedback">
+                                Please Enter your province!
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="city" class="form-label">City</label>
+                            <input type="text" class="form-control" id="city" name="city" required>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                            <div class="invalid-feedback">
+                                Please Enter your city!
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="zip_code" class="form-label">Zip Code</label>
+                            <input type="number" class="form-control" id="zip_code" name="zip_code" required>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                            <div class="invalid-feedback">
+                                Please Enter your zip code!
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" required>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                            <div class="invalid-feedback">
+                                Please Enter a valid email!
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="home_phone" class="form-label">Home Phone</label>
+                            <input type="number" class="form-control" id="home_phone" name="home_phone" required>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                            <div class="invalid-feedback">
+                                Please Enter your home number!
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="mobile_phone" class="form-label">Mobile Phone</label>
+                            <input type="number" class="form-control" id="mobile_phone" name="mobile_phone" required>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                            <div class="invalid-feedback">
+                                Please Enter your mobile number!
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="occupation" class="form-label">Occupation</label>
+                            <input type="text" class="form-control" id="occupation" name="occupation" >
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="current_employment" class="form-label">Current Employment</label>
+                            <select class="form-select" id="current_employment" name="current_employment" required>
+                                <option selected disabled value="">Choose...</option>
+                                <option value="Full-Time">Full Time</option>
+                                <option value="Part-Time">Part Time</option>
+                                <option value="Unemployed">Unemployed</option>
+                                <option value="Retired">Retired</option>
+                                <option value="Disabled">Disabled</option>
+                            </select>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                            <div class="invalid-feedback">
+                                Please select a gender!
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="occupation" class="form-label">Referred By</label>
+                            <input type="text" class="form-control" id="referred_by" name="referred_by">
+                        </div>
+                        <div class="col-12">
+                            <button class="btn btn-primary" type="submit">Add New Client</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
@@ -41,12 +156,8 @@
     <!-- end of sidebar-->
 
     <!-- scrips-->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
-        integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js"
-        integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy"
-        crossorigin="anonymous"></script>
+    <%- include('components/cdn_scripts') %>
+   
 </body>
 
 </html>

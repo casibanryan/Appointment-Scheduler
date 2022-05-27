@@ -1,0 +1,276 @@
+<%- include('components/head') %>
+
+          <div class="row">
+              <%- include('components/sidebar') %>
+              
+            <div class="col-sm px-3 min-vh-100 bg-light">
+                <header class="border-bottom" style='padding-bottom: 3.4rem'>
+                  <p class="fw-bold float-end text-muted p-3">Welcome, Admin</p>
+                </header>
+
+                <!-- content -->
+                <div class="container-fluid">
+                  <h3 class="fw-bold my-3">
+                    Details
+                  </h3>
+                    <ul class="list-group list-group-horizontal">
+                      <li class="list-group-item" id="item1">
+                        <a href="#" class="text-decoration-none text-muted" id="aiBtn" onclick="activeInfo(1)">
+                        <i class="bi bi-person-workspace me-2"></i> 
+                          Appointment Info 
+                      </a>
+                    </li>
+                      <li class="list-group-item bg-light border-0" id="item2">
+                        <a href="#" class="text-decoration-none" id="ciBtn"  onclick="activeInfo(2)">
+                        <i class="bi bi-person-lines-fill me-2"></i>
+                            Client Info
+                        </a>
+                      </li>
+                      <li class="list-group-item bg-light border-0" id="item3">
+                        <a href="#" class="text-decoration-none" id="ahBtn"  onclick="activeInfo(3)">
+                        <i class="bi bi-clock-history me-2"></i>
+                         Appointment History 
+                        </a>
+                      </li>
+                    </ul> 
+
+                    <!-- details of Appointment info--> 
+                    <div class="bg-white" id="appointment-info">
+                      <div class="container py-4">
+                        <% appointment_details.map(val => {
+                              // format the date
+                              const format_date = new Date(val.date)
+                              const day = format_date.getDate()
+                              const months = [
+                              'January',
+                              'February',
+                              'March',
+                              'April',
+                              'May',
+                              'June',
+                              'July',
+                              'August',
+                              'September',
+                              'October',
+                              'November',
+                              'December'
+                              ];
+                              const month_index = format_date.getMonth()
+                              const month_name = months[month_index]
+                              const year = format_date.getFullYear()
+                              
+                              // format time
+                              var suffix = val.time >= 12 ? "PM":"AM";
+                              var hours = val.time + " " + suffix
+
+                              function find_developer(developer_id) {
+                                  const assign_developer = developer_id == 6 ? "resty" : developer_id == 7 ? "christian" : developer_id == 8 ?
+                                  "karylle" : "aljon"
+                                  return assign_developer;
+                              }
+                          
+                          %>
+                            <p class="fw-bold mb-0">Developer</p>
+                            <span class="mt-1 mb-2 d-block">
+                              <input class="form-control w-25" type="text" value="<%= find_developer(val.developer_id) %>"  disabled
+                                readonly>
+                                </span>
+                            <p class="fw-bold mb-0">Client</p>
+                            <span class="mb-2 mt-1 d-block">
+                                <% client_data.map(client => {
+                                  if(client.client_id === val.client_id) { %>
+                                      <input class="form-control w-25" type="text" value="<%= client.name %>"
+                                        disabled readonly>
+                                  
+                                <% } }) %>
+                            </span>
+                            <p class="fw-bold mb-0"> Date of Appointment </p>
+                            <span class="mb-2 mt-1 d-block">
+                              <input class="form-control w-25" type="text" value="<%= [month_name,day,year].join(" ") %>" 
+                                disabled readonly>
+                              </span>
+                            <p class="fw-bold mb-0"> Appointment Time </p>
+                            <span class="mb-2 mt-1 d-block">
+                              <input class="form-control w-25" type="text" value="<%= hours %>" 
+                                disabled readonly />
+                              </span>
+                            <p class="fw-bold mb-0"> Reason for Appointment </p>
+                            <span class="mb-2 mt-1 d-block"><input class="form-control w-25" type="text" value="<%= val.reason %>" disabled readonly> </span>  
+                            <p class="fw-bold mb-0"> Additional Comments </p>
+                            <span class="mb-2 mt-1 d-block"><input class="form-control w-25" type="text" value="<%= val.comments %>" disabled readonly /> </span>
+                      </div>
+                    </div>
+
+                    <!-- details of client info-->
+                    <div class="bg-white container d-none" id="client-info">
+                      <div class="container py-4">
+                        <% client_data.map(client=> {
+                          if(client.client_id === val.client_id) { %>
+                        
+                          <h5 class="text-info mb-2">Personal Information</h5>
+                          <div class="row">
+                            <div class="col-md-4">
+                                <div class="mb-4">
+                                  <label for="client_name" class="form-label">Name</label>
+                                  <input type="text" class="form-control w-75 text-capitalize" id="client_name"  value="<%= client.name %>" aria-label="client_name" disabled readonly>
+                                </div>
+                              </div>
+                              <div class="col-md-4">
+                                <div class="mb-4">
+                                  <label for="client_birthDay" class="form-label">Birth Date</label>
+                                  <input type="text" class="form-control w-75" id="client_birthDay" value="<%= new Date(client.birthdate).toLocaleString().split(',')[0] %>" aria-label="client_birthDay" disabled
+                                    readonly>
+                                </div>
+                              </div>
+                              <div class="col-md-4">
+                                <div class="mb-4">
+                                  <label for="client_gender" class="form-label">Gender</label>
+                                  <input type="text" class="form-control w-75 text-capitalize" id="client_gender"
+                                    value="<%= client.gender %>" aria-label="client_gender" disabled
+                                    readonly>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-11">
+                                    <div class="mb-3">
+                                      <label for="client_address" class="form-label">Address</label>
+                                      <input type="text" class="form-control  text-capitalize" id="client_address" value="<%= client.address %>"
+                                        aria-label="client_address" disabled readonly>
+                                    </div>
+                                  </div>
+                              </div>
+
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <div class="mb-4">
+                                    <label for="client_province" class="form-label">Province</label>
+                                    <input type="text" class="form-control w-75 text-capitalize" id="client_province" value="<%= client.province %>"
+                                      aria-label="client_province" disabled readonly>
+                                  </div>
+                                </div>
+                                <div class="col-md-4">
+                                  <div class="mb-4">
+                                    <label for="client_city" class="form-label">City</label>
+                                    <input type="text" class="form-control w-75" id="client_city"
+                                      value="<%= client.city %>" aria-label="client_city" disabled
+                                      readonly>
+                                  </div>
+                                </div>
+                                <div class="col-md-4">
+                                  <div class="mb-4">
+                                    <label for="client_zipCode" class="form-label">Zip Code</label>
+                                    <input type="text" class="form-control w-75 text-capitalize" id="client_zipCode" value="<%= client.zip_code %>"
+                                      aria-label="client_zipCode" disabled readonly>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <div class="mb-4">
+                                    <label for="client_email" class="form-label">Email</label>
+                                    <input type="email" class="form-control w-75 text-capitalize" id="client_email" value="<%= client.email %>"
+                                      aria-label="client_email" disabled readonly>
+                                  </div>
+                                </div>
+                                <div class="col-md-4">
+                                  <div class="mb-4">
+                                    <label for="client_homePhone" class="form-label">Home Phone</label>
+                                    <input type="text" class="form-control w-75" id="client_homePhone" value="<%= client.home_phone %>" aria-label="client_homePhone"
+                                      disabled readonly>
+                                  </div>
+                                </div>
+                                <div class="col-md-4">
+                                  <div class="mb-4">
+                                    <label for="client_mobilePhone" class="form-label">Mobile Phone</label>
+                                    <input type="text" class="form-control w-75 text-capitalize" id="client_mobilePhone" value="<%= client.mobile_phone %>"
+                                      aria-label="client_mobilePhone" disabled readonly>
+                                  </div>
+                                </div>
+                              </div>
+
+                                <div class="row">
+                                  <div class="col-md-4">
+                                    <div class="mb-4">
+                                      <label for="client_occupation" class="form-label">Occupation</label>
+                                      <input type="email" class="form-control w-75 text-capitalize" id="client_occupation" value="<%= client.occupation %>"
+                                        aria-label="client_occupation" disabled readonly>
+                                    </div>
+                                  </div>
+                                  <div class="col-md-4">
+                                    <div class="mb-4">
+                                      <label for="client_currentEmployment" class="form-label">Current Employment</label>
+                                      <input type="text" class="form-control w-75" id="client_currentEmployment" value="<%= client.current_employment %>"
+                                        aria-label="client_currentEmployment" disabled readonly>
+                                    </div>
+                                  </div>
+                                  <div class="col-md-4">
+                                    <div class="mb-4">
+                                      <label for="client_referredBy" class="form-label">Referred By</label>
+                                      <input type="text" class="form-control w-75 text-capitalize" id="client_referredBy"
+                                        value="<%= client.referred_by %>" aria-label="client_referredBy" disabled readonly>
+                                    </div>
+                                  </div>
+                                </div>
+
+                            <% } }) %>
+                        </div>
+                    </div>
+
+                    <!-- details of Appointment history-->
+                    <div class="bg-white d-none container" id="appointment-history">
+                      <div class="container py-4">
+                        <div class="table-responsive">
+                        <table class="table table-hover table-borderless">
+                          <thead>
+                            <tr class="bg-sidebar-header text-white">
+                              <th scope="col">Date of Appointment</th>
+                              <th scope="col">Appointment Time</th>
+                              <th scope="col">Developer</th>
+                              <th scope="col">Client</th>
+                              <th scope="col">Reason for Appointment</th>
+                              <th scope="col" colspan="5">Additional Comments</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <% appointment_history.map(history => {
+
+                              if(history.client_id === val.client_id) { %>
+                                <tr>
+                                  <td><%= new Date(history.date).toLocaleString().split(',')[0] %></td>
+                                  <td><%= history.time %></td>
+                                  <td><%= find_developer(history.developer_id) %></td>
+                                    <td>
+                                      <% client_data.map(client => {
+                                        if(history.client_id === client.client_id) { %>
+                                            <%= client.name %>
+                                      <%  }}) %>
+                                    </td>
+                                    <td>
+                                      <%= history.reason %>
+                                    </td>
+                                      <td>
+                                        <%= history.comments %>
+                                      </td>
+                                </tr>
+
+                              <% } }) %>
+                          </tbody>
+                        </table>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                    <% }) %>
+                <!-- end of content-->
+            </div>
+          </div>
+      
+
+        <!-- scrips-->
+      <%- include('components/cdn_scripts') %>
+      <script src="/js/client_details.js"></script>
+  </body>
+</html>
