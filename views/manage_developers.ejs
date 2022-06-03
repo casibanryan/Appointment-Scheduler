@@ -1,0 +1,93 @@
+<%- include('components/head') %>
+    <!-- sidebar-->
+    <div class="row">
+        <%- include('components/sidebar') %>
+            <div class="col-sm px-3 min-vh-100 bg-light">
+                <header class="border-bottom" style="padding-bottom: 3.4rem">
+                    <p class="fw-bold float-end text-muted p-3">Welcome, Admin</p>
+                </header>
+
+                <!-- content -->
+                <div class="container-fluid">
+                    <h3 class="my-3 fw-bold ">Manage Developer</h3>
+                    <div class="container bg-white pt-3">
+                        <div class="table-responsive">
+                            <table class="table table-borderless table-hover">
+                                <thead>
+                                    <tr class="bg-sidebar-header text-white">
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Position</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">Home number</th>
+                                        <th scope="col">Mobile number</th>
+                                        <th scope="col"></th>
+                                        <th scope="col"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% developer_data.map(val=> { %>
+                                        <tr>
+                                            <form action="/manage-developers" method="post"
+                                                class="row g-3 needs-validation"
+                                                novalidate>
+                                                <td>
+                                                    <input type="hidden" class="form-control" name="developer_id"
+                                                        value="<%= val.developer_id %>">
+                                                    <input type="text" class="form-control text-capitalize" style="width: fit-content" name="name"
+                                                        value="<%= val.name %>" required >
+                                                </td>
+                                                <td>
+                                                    <input type="text" class="form-control text-capitalize" style="width: fit-content"
+                                                        name="position" value="<%= val.position %>" required >
+                                                </td>
+                                                <!-- <td>
+                                                    <input type="file" class="form-control text-capitalize"
+                                                        name="img_src" value="" accept='image/*'
+                                                        required>
+                                                </td> -->
+                                                <td>
+                                                    <input type="email" class="form-control" name="email" style="width: fit-content"
+                                                        value="<%= val.email %>" required>
+                                                </td>
+                                                <td>
+                                                    <input type="number" class="form-control" name="home_phone"
+                                                        value="<%= val.home_phone%>" required>
+                                                </td>
+                                                <td>
+                                                    <input type="number" class="form-control" name="mobile_phone"
+                                                        value="<%= val.mobile_phone%>" required>
+                                                </td>
+
+                                                <td class="float-end">
+                                                    <button type="submit" class="btn btn-outline-primary"><i class="bi bi-pencil"></i></button>
+                                            </form>
+                                            </td>
+                                            <td>
+                                                <form action=<%=`/manage-developers/${val.developer_id}` %>
+                                                    method="get">
+                                                    <input type="hidden" class="form-control" name="delete_id"
+                                                        value="<%= val.developer_id %>">
+                                                    <button type="submit" class="btn btn-outline-danger"><i
+                                                            class="bi bi-trash"></i></button>
+                                                </form>
+                                            </td>
+                                        </tr>
+
+                                        <% }) %>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+    </div>
+
+    <!-- scrips-->
+    <%- include('components/cdn_scripts') %>
+
+        </body>
+
+        </html>

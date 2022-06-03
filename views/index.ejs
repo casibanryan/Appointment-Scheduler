@@ -1,156 +1,187 @@
-    <%- include('components/head') %>
+<%- include('components/head') %>
     <link rel="stylesheet" href="css/index.css">
-
 
     <!-- sidebar-->
     <div class="row">
 
-            <%- include('components/sidebar') %>
+        <%- include('components/sidebar') %>
 
-        <div class="col-sm px-3 min-vh-100 bg-light">
-            <header class="border-bottom" style='padding-bottom: 3.4rem'>
-                <p class="fw-bold float-end text-muted p-3">Welcome, Admin</p>
-            </header>
+            <div class="col-sm px-3 min-vh-100 bg-light">
+                <header class="border-bottom" style='padding-bottom: 3.4rem'>
+                    <p class="fw-bold float-end text-muted text-capitalize p-3">Welcome, <%= user %></p>
+                </header>
 
-            <!-- content -->
-            <div class="container-fluid">
-                <div class="d-flex justify-content-between my-3">
-                    <h3 class="fw-bold me-5">
-                        Schedule Clients
-                    </h3>
-                    <button class="btn btn-primary ms-5" data-bs-toggle="modal" data-bs-target="#new_appointment"><i class="bi bi-plus-lg me-2"></i>New Appointment</button>
-                </div>
+                <!-- content -->
+                <div class="container-fluid">
+                    <div class="d-flex justify-content-between my-3">
+                        <h3 class="fw-bold me-5">
+                            Schedule Clients
+                        </h3>
+                        <button class="btn btn-primary ms-5" data-bs-toggle="modal" data-bs-target="#new_appointment"><i
+                                class="bi bi-plus-lg me-2"></i>New Appointment</button>
+                    </div>
 
 
-                <div class="event-schedule-area-two bg-color pad100">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="tab-content mt-5" id="myTabContent">
-                                    <div class="tab-pane fade active show" id="sunday" role="tabpanel" >
-                                        <div class="table-responsive">
-                                            <table class="table">
-                                                <thead>
-                                                    <tr>
-                                                        <th class="text-center" scope="col">Date</th>
-                                                        <th scope="col">Developer</th>
-                                                        <th scope="col">Client</th>
-                                                        <th scope="col">Venue</th>
-                                                        <th class="text-center" scope="col"></th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <% appointment_data.map((val, i)=> {
+                    <div class="event-schedule-area-two bg-color pad100">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="tab-content my-5" id="myTabContent">
+                                        <div class="tab-pane fade active show" role="tabpanel">
+                                            <div class="table-responsive">
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="text-center" scope="col">Date</th>
+                                                            <th scope="col">Developer</th>
+                                                            <th scope="col">Client</th>
+                                                            <th scope="col">Venue</th>
+                                                            <th class="text-center" scope="col"></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <% appointment_data.map((val, i)=> {
 
-                                                        // format the date
-                                                        const format_date = new Date(val.date)
-                                                        const day = format_date.getDate()
-                                                        const months = [
-                                                        'January',
-                                                        'February',
-                                                        'March',
-                                                        'April',
-                                                        'May',
-                                                        'June',
-                                                        'July',
-                                                        'August',
-                                                        'September',
-                                                        'October',
-                                                        'November',
-                                                        'December'
-                                                        ];
-                                                    const month_index = format_date.getMonth()
-                                                    const month_name = months[month_index]
+                                                            // format the date
+                                                            const format_date = new Date(val.date)
+                                                            const day = format_date.getDate()
+                                                            const months = [
+                                                            'January',
+                                                            'February',
+                                                            'March',
+                                                            'April',
+                                                            'May',
+                                                            'June',
+                                                            'July',
+                                                            'August',
+                                                            'September',
+                                                            'October',
+                                                            'November',
+                                                            'December'
+                                                            ];
+                                                            const month_index = format_date.getMonth()
+                                                            const month_name = months[month_index]
 
-                                                    // format time
-                                                    var suffix = val.time >= 12 ? "PM":"AM";
-                                                    var hours = val.time + " " + suffix
-                                                    const assign_developer = val.developer_id == 6 ? "resty" : val.developer_id == 7 ? "christian" : val.developer_id == 8 ? "karylle" : "aljon"
-                                                    
-                                                    %>
-                                                    <tr class="inner-box">
-                                                        <th scope="row">
-                                                            <div class="event-date">
-                                                                <span>
-                                                                    <%= day %>
-                                                                </span>
-                                                                <p>
-                                                                    <%= month_name %>
-                                                                </p>
-                                                            </div>
-                                                        </th>
-                                                        <td>
-                                                            <div class="event-img">
-                                                                <img src=<%= "images/developer/" + assign_developer + ".png" %> alt="developer" data-bs-toggle="tooltip" data-bs-placement="top" title="Assign Developer" />
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="event-wrap">
-                                                                <h3><a href=<%= "/appointment/details/" + val.appointment_id %>>
-                                                                     <% client_data.map(client => {
-                                                                        if(client.client_id === val.client_id ) { %>
+                                                            // format time
+                                                            var suffix = val.time >= 12 ? "PM":"AM";
+                                                            var hours = val.time + " " + suffix
 
-                                                                        <%= client.name %>
+                                                            // todays date
+                                                            const timeElapsed = Date.now();
+                                                            const today = new Date(timeElapsed)
+                                                            // schedule for today
+                                                            const active_schedule = (format_date.toDateString() ===
+                                                            today.toDateString()) ? 'inner-box table-active' :
+                                                            'inner-box'
+                                                            %>
+                                                            <tr class="<%= active_schedule %>">
+                                                                <th scope="row">
+                                                                    <div class="event-date">
+                                                                        <span>
+                                                                            <%= day %>
+                                                                        </span>
+                                                                        <p>
+                                                                            <%= month_name %>
+                                                                        </p>
+                                                                    </div>
+                                                                </th>
+                                                                <td>
+                                                                    <div class="event-img">
+                                                                        <% developer_data.map(dev=> { 
+                                                                            if(dev.developer_id === val.developer_id) { %>
+                                                                            <img src=<%="images/developer/" + dev.img_src %>
+                                                                            alt="developer"
+                                                                            data-bs-toggle="tooltip"
+                                                                            data-bs-placement="top"
+                                                                            title="<%= dev.name %>" />
                                                                             
-                                                                     <% } }) %>
-                                                                </a></h3>
-                                                                <div class="meta">
-                                                                    <div class="organizers" >
-                                                                        <a href="#" class="text-decoration-none" data-bs-toggle="tooltip" data-bs-placement="top" type="button" title="Organization">
-                                                                            <%= val.organization %>
-                                                                        </a>
+                                                                       <% }})%>
+                                                                      
+                                                                               
                                                                     </div>
-                                                                    <div class="categories">
-                                                                        <a href="#" class="text-decoration-none"  data-bs-toggle="tooltip" data-bs-placement="top" type="button" title="Category">
-                                                                            <% category_data.map(category => { if(category.category_id === val.category) { %>
-                                                                                    <%= category.category_name %>
-                                                                            <% } })  %>
-                                                                        </a>
-                                                                    </div>
-                                                                    <div class="time">
-                                                                        <span><%= hours %></span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="r-no">
-                                                                <% venue_data.map(venue => { if(venue.venue_id === val.venue){ %>
-                                                                    <span>
-                                                                        <%= venue.location %>
-                                                                    </span>
+                                                                </td>
+                                                                <td>
+                                                                    <div class="event-wrap">
+                                                                        <h3><a class="text-capitalize" href=<%="/appointment/details/" +
+                                                                                val.appointment_id %>>
+                                                                                <% client_data.map(client=> {
+                                                                                    if(client.client_id ===
+                                                                                    val.client_id ) { %>
 
-                                                                <% }}) %>
-                                                                
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="primary-btn">
-                                                                <a class="btn btn-primary" href=<%= "/appointment/details/" + val.appointment_id %> >More Details</a>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <% }) %>
-                                                </tbody>
-                                            </table>
+                                                                                    <%= client.name %>
+
+                                                                                        <% } }) %>
+                                                                            </a></h3>
+                                                                        <div class="meta">
+                                                                            <div class="organizers">
+                                                                                <a href="#" class="text-decoration-none"
+                                                                                    data-bs-toggle="tooltip"
+                                                                                    data-bs-placement="top"
+                                                                                    type="button" title="Organization">
+                                                                                    <%= val.organization %>
+                                                                                </a>
+                                                                            </div>
+                                                                            <div class="categories">
+                                                                                <a href="#" class="text-decoration-none"
+                                                                                    data-bs-toggle="tooltip"
+                                                                                    data-bs-placement="top"
+                                                                                    type="button" title="Category">
+                                                                                    <% category_data.map(category=> {
+                                                                                        if(category.category_id ===
+                                                                                        val.category) { %>
+                                                                                        <%= category.category_name %>
+                                                                                            <% } }) %>
+                                                                                </a>
+                                                                            </div>
+                                                                            <div class="time">
+                                                                                <span>
+                                                                                    <%= hours %>
+                                                                                </span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+                                                                <td>
+                                                                    <div class="r-no">
+                                                                        <% venue_data.map(venue=> { if(venue.venue_id
+                                                                            === val.venue){ %>
+                                                                            <span>
+                                                                                <%= venue.location %>
+                                                                            </span>
+
+                                                                            <% }}) %>
+
+                                                                    </div>
+                                                                </td>
+                                                                <td>
+                                                                    <div class="primary-btn">
+                                                                        <a class="btn btn-primary"
+                                                                            href=<%="/appointment/details/" +
+                                                                            val.appointment_id %> >More Details</a>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                            <% }) %>
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+                                <!-- /col end-->
                             </div>
-                            <!-- /col end-->
+                            <!-- /row end-->
                         </div>
-                        <!-- /row end-->
                     </div>
+
+
                 </div>
-
-
+                <!-- end of content-->
             </div>
-            <!-- end of content-->
-        </div>
     </div>
 
     <!-- modal area-->
-    <div class="modal fade" id="new_appointment"  aria-labelledby="new_appointmentLabel" aria-hidden="true">
+    <div class="modal fade" id="new_appointment" aria-labelledby="new_appointmentLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -159,26 +190,26 @@
                 </div>
                 <div class="modal-body px-5">
                     <!-- form handling-->
-                    <form method="POST" action="/"  id="newAppointment" class="row needs-validation" novalidate>
+                    <form method="POST" action="/" id="newAppointment" class="row needs-validation" novalidate>
                         <!-- client-->
                         <div class="mb-3">
                             <label for="client" class="form-label">
                                 <i class="bi bi-person pe-1"></i>
-                                 Client
+                                Client
                             </label>
-                           <select name="client_id" id="client" class="form-select" required>
+                            <select name="client_id" id="client" class="form-select" required>
                                 <option selected disabled value="">select a client </option>
-                                <% 
-                                client_data.map(val => { %>
-                                    <option value=<%= `${val.client_id}` %>> <%= val.name %> </option>
-                                <% }) %>
-                           </select>
-                           <div class="valid-feedback">
-                               Looks good!
-                           </div>
-                           <div class="invalid-feedback">
-                               Select a client!
-                           </div>
+                                <% client_data.map(val=> { %>
+                                    <option value=<%=`${val.client_id}` %>> <%= val.name %>
+                                    </option>
+                                    <% }) %>
+                            </select>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                            <div class="invalid-feedback">
+                                Select a client!
+                            </div>
                         </div>
                         <!-- end of client-->
 
@@ -186,14 +217,15 @@
                         <div class="mb-3">
                             <label for="developer" class="form-label">
                                 <i class="bi bi-person-workspace pe-1"></i>
-                                 Developer
+                                Developer
                             </label>
                             <select name="developer_id" id="developer" class="form-select" required>
                                 <option selected disabled value="">select a developer </option>
-                                <% developer_data.map(val => { %>
-                                    <option value=<%=`${val.developer_id}` %>> <%= val.name %> </option>
-                                <% }) %>
-                            
+                                <% developer_data.map(val=> { %>
+                                    <option value=<%=`${val.developer_id}` %>> <%= val.name %>
+                                    </option>
+                                    <% }) %>
+
                             </select>
                             <div class="valid-feedback">
                                 Looks good!
@@ -207,7 +239,7 @@
                         <!-- venue-->
                         <div class="mb-3">
                             <label for="venue" class="form-label">
-                            <i class="bi bi-shop-window pe-1"></i>
+                                <i class="bi bi-shop-window pe-1"></i>
                                 Venue
                             </label>
                             <select name="venue" id="venue" class="form-select" required>
@@ -254,7 +286,8 @@
                                 <i class="fa fa-building-o pe-1" aria-hidden="true"></i>
                                 Organization / Company
                             </label>
-                            <input type="text" name="organization" id="organization" class="form-control" placeholder="* if none leave blank">
+                            <input type="text" name="organization" id="organization" class="form-control"
+                                placeholder="* if none leave blank">
                         </div>
                         <!-- end of organization -->
 
@@ -264,7 +297,8 @@
                                 <i class="bi bi-pin pe-1"></i>
                                 Reason for appointment
                             </label>
-                            <textarea name="reason" id="reason" class="form-control" cols="30" rows="3" required></textarea>
+                            <textarea name="reason" id="reason" class="form-control" cols="30" rows="3"
+                                required></textarea>
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
@@ -278,9 +312,10 @@
                         <div class="mb-3">
                             <label for="comment" class="form-label">
                                 <i class="bi bi-chat-left-dots"></i>
-                                 Additional Comments
+                                Additional Comments
                             </label>
-                            <textarea name="comments" id="comment" class="form-control" cols="30" rows="3" required></textarea>
+                            <textarea name="comments" id="comment" class="form-control" cols="30" rows="3"
+                                required></textarea>
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
@@ -309,7 +344,7 @@
                         <!-- time of appointment -->
                         <div class="mb-3">
                             <label for="time" class="form-label">
-                            <i class="fa fa-clock-o pe-1" aria-hidden="true"></i>
+                                <i class="fa fa-clock-o pe-1" aria-hidden="true"></i>
                                 Time of Appointment
                             </label>
                             <input type="time" class="form-control" name="time" id="time" required>
@@ -324,10 +359,10 @@
 
                         <!-- choose a reminder -->
                         <div class="mb-3 d-flex">
-                                <label for="" class="form-label me-4">
-                                    <i class="fa fa-bell-o pe-1" aria-hidden="true"></i>
-                                    Send Reminder
-                                </label>
+                            <label for="" class="form-label me-4">
+                                <i class="fa fa-bell-o pe-1" aria-hidden="true"></i>
+                                Send Reminder
+                            </label>
                             <div class="form-check me-3">
                                 <input class="form-check-input" type="checkbox" value="1" name="reminder" id="sms">
                                 <label class="form-check-label" for="sms">
@@ -335,16 +370,17 @@
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="2" name="reminder" id="email" >
+                                <input class="form-check-input" type="checkbox" value="2" name="reminder" id="email">
                                 <label class="form-check-label" for="email">
                                     Email
                                 </label>
                             </div>
                         </div>
-                    </div>
+                </div>
                 <div class="modal-footer justify-content-center">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" id="set_appointment" class="btn btn-primary text-uppercase px-3"><i class="bi bi-calendar2-event me-1"></i> Set</button>
+                    <button type="submit" id="set_appointment" class="btn btn-primary text-uppercase px-3"><i
+                            class="bi bi-calendar2-event me-1"></i> Set</button>
                     </form>
                 </div>
             </div>
@@ -353,7 +389,7 @@
 
 
     <%- include('components/cdn_scripts') %>
-    
-</body>
 
-</html>
+        </body>
+
+        </html>

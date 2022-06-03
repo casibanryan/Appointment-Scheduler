@@ -1,0 +1,173 @@
+<%- include('components/head') %>
+    <link rel="stylesheet" href="css/index.css">
+
+    <!-- sidebar-->
+    <div class="row">
+        <%- include('components/sidebar') %>
+
+            <div class="col-sm px-3 min-vh-100 bg-light">
+                <header class="border-bottom" style='padding-bottom: 3.4rem'>
+                    <p class="fw-bold float-end text-muted p-3">Welcome, <%= user %></p>
+                </header>
+
+                <!-- content -->
+                <div class="container-fluid">
+                    <div class="event-schedule-area-two bg-color pad100">
+                        <div class="container">
+                                    <div class="tab-content my-5" id="myTabContent">
+                                        <div class="tab-pane fade active show" role="tabpanel">
+                                            <div class="table-responsive">
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="text-center" scope="col">Date</th>
+                                                            <th scope="col">Developer</th>
+                                                            <th scope="col">Client</th>
+                                                            <th scope="col">Venue</th>
+                                                            <th class="text-center" scope="col"></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <% appointment_data.map((val, i)=> {
+
+                                                            // format the date
+                                                            const format_date = new Date(val.date)
+                                                            const day = format_date.getDate()
+                                                            const months = [
+                                                            'January',
+                                                            'February',
+                                                            'March',
+                                                            'April',
+                                                            'May',
+                                                            'June',
+                                                            'July',
+                                                            'August',
+                                                            'September',
+                                                            'October',
+                                                            'November',
+                                                            'December'
+                                                            ];
+                                                            const month_index = format_date.getMonth()
+                                                            const month_name = months[month_index]
+
+                                                            // format time
+                                                            var suffix = val.time >= 12 ? "PM":"AM";
+                                                            var hours = val.time + " " + suffix
+
+                                                            // todays date
+                                                            const timeElapsed = Date.now();
+                                                            const today = new Date(timeElapsed)
+                                                            // schedule for today
+                                                            const active_schedule = (format_date.toDateString() ===
+                                                            today.toDateString()) ? 'inner-box table-active' :
+                                                            'inner-box'
+                                                            %>
+                                                            <tr class="<%= active_schedule %>">
+                                                                <th scope="row">
+                                                                    <div class="event-date">
+                                                                        <span>
+                                                                            <%= day %>
+                                                                        </span>
+                                                                        <p>
+                                                                            <%= month_name %>
+                                                                        </p>
+                                                                    </div>
+                                                                </th>
+                                                                <td>
+                                                                    <div class="event-img">
+                                                                        <% developer_data.map(dev=> {
+                                                                            if(dev.developer_id === val.developer_id) {
+                                                                            %>
+                                                                            <img src=<%="images/developer/" +
+                                                                                dev.img_src %>
+                                                                            alt="developer"
+                                                                            data-bs-toggle="tooltip"
+                                                                            data-bs-placement="top"
+                                                                            title="<%= dev.name %>" />
+
+                                                                                <% }})%>
+
+
+                                                                    </div>
+                                                                </td>
+                                                                <td>
+                                                                    <div class="event-wrap">
+                                                                        <h3><a class="text-capitalize"
+                                                                                href=<%="/appointment/details/" +
+                                                                                val.appointment_id %>>
+                                                                                <% client_data.map(client => { %>
+                                                                                    <%= client.name %>
+                                                                                        <%  }) %>
+                                                                            </a></h3>
+                                                                        <div class="meta">
+                                                                            <div class="organizers">
+                                                                                <a href="#" class="text-decoration-none"
+                                                                                    data-bs-toggle="tooltip"
+                                                                                    data-bs-placement="top"
+                                                                                    type="button" title="Organization">
+                                                                                    <%= val.organization %>
+                                                                                </a>
+                                                                            </div>
+                                                                            <div class="categories">
+                                                                                <a href="#" class="text-decoration-none"
+                                                                                    data-bs-toggle="tooltip"
+                                                                                    data-bs-placement="top"
+                                                                                    type="button" title="Category">
+                                                                                    <% category_data.map(category=> {
+                                                                                        if(category.category_id ===
+                                                                                        val.category) { %>
+                                                                                        <%= category.category_name %>
+                                                                                            <% } }) %>
+                                                                                </a>
+                                                                            </div>
+                                                                            <div class="time">
+                                                                                <span>
+                                                                                    <%= hours %>
+                                                                                </span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+                                                                <td>
+                                                                    <div class="r-no">
+                                                                        <% venue_data.map(venue=> { if(venue.venue_id
+                                                                            === val.venue){ %>
+                                                                            <span>
+                                                                                <%= venue.location %>
+                                                                            </span>
+
+                                                                            <% }}) %>
+
+                                                                    </div>
+                                                                </td>
+                                                                <td>
+                                                                    <div class="primary-btn">
+                                                                        <a class="btn btn-primary"
+                                                                            href=<%="/appointment/details/" +
+                                                                            val.appointment_id %> >More Details</a>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                            <% }) %>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <!-- end of content-->
+            </div>
+    </div>
+
+  
+
+
+    <%- include('components/cdn_scripts') %>
+
+        </body>
+
+        </html>

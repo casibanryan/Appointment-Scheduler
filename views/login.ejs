@@ -1,0 +1,107 @@
+<%- include('components/head') %>
+    <link rel="stylesheet" href="css/index.css">
+        <link rel="stylesheet" href="css/login.css">
+
+    <!-- sidebar-->
+    <div class="row">
+
+    <div class="col-12 col-lg-auto bg-sidebar sticky-top pe-0">
+        <div class="d-flex flex-sm-column flex-row flex-nowrap bg-sidebar sticky-top pe-0">
+            <a href="#" class="fw-bold text-decoration-none h5 py-3 d-flex bg-sidebar-header text-white px-3">Appointment
+                System </a>
+            <ul class="nav nav-pills nav-flush flex-lg-column flex-row flex-nowrap mb-auto">
+                <li>
+                    <a href="/login" class="nav-link py-3 px-3 text-white sidebar-link" title="login"
+                        data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="login">
+                    <i class="bi bi-shield-lock-fill me-2"></i>
+                        Login
+                    </a>
+                </li>
+                <li>
+                    <a href="/new-client" class="nav-link py-3 px-3 text-white sidebar-link" title="New client"
+                        data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="New client">
+                        <i class="bi bi-person-plus-fill me-2"></i>
+                        Register
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+            <div class="col-sm px-3 min-vh-100 bg-light">
+                <header class="border-bottom" style='padding-bottom: 3.4rem'>
+                    <p class="fw-bold float-end text-muted p-3">Welcome, Guest</p>
+                </header>
+
+                <!-- content -->
+                <div class="container-fluid">
+
+                    <div class="event-schedule-area-two bg-color pad100 mt-5">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="row justify-content-center">
+                                    <div class="col-md-8">
+                                        <div class="card-group mb-0">
+                                            <div class="card p-4">
+                                                <div class="card-body">
+                                                    <form action="/login" method="post" class="needs-validation" novalidate>
+                                                            <h1>Login</h1>
+                                                            <p class="text-muted">Sign In to your account</p>
+                                                            <% if(invalid) { %>
+                                                            <div class="alert alert-danger" role="alert">
+                                                               Invalid name/email or password!
+                                                            </div>
+                                                                <% } %>
+
+                                                            <div class="input-group mb-3">
+                                                                <span class="input-group-text" id="username"><i class="fa fa-user"></i></span>
+                                                                <input type="text" class="form-control" name="username" placeholder="Enter name or email" aria-label="Username"
+                                                                    aria-describedby="username" required />
+                                                            </div>
+                                                            <div class="input-group mb-4">
+                                                                <span class="input-group-text" id="password"><i class="fa fa-lock"></i></span>
+                                                                <input type="password" class="form-control" name="password" placeholder="Password" aria-label="Password"
+                                                                    aria-describedby="password" required>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-6">
+                                                                    <button type="submit" class="btn btn-primary px-4">Login</button>
+                                                                </div>
+                                                            </div>
+                                                    </form>
+                                                
+                                                </div>
+                                            </div>
+                                            <div class="card text-white bg-primary py-5 d-md-down-none" style="width:44%">
+                                                <div class="card-body text-center">
+                                                    <div>
+                                                        <h2>Sign up</h2>
+                                                        <p>Sign-up for free to set an appointment to the best developer in central visayas.</p>
+                                                        <a type="button" class="btn btn-primary active mt-3" href="/new-client">Register Now!</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                                <!-- /col end-->
+                            </div>
+                            <!-- /row end-->
+                        </div>
+                    </div>
+
+
+                </div>
+                <!-- end of content-->
+            </div>
+    </div>
+
+
+
+    <%- include('components/cdn_scripts') %>
+
+        </body>
+
+        </html>

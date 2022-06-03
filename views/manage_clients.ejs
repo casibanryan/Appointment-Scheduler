@@ -31,10 +31,10 @@
                                         <form action="/manage-clients" method="post" class="row g-3 needs-validation" novalidate>
                                         <td>
                                             <input type="hidden" class="form-control" name="client_id" value="<%= val.client_id %>">
-                                            <input type="text" class="form-control" name="name" value="<%= val.name %>" required>
+                                            <input type="text" class="form-control text-capitalize" name="name" value="<%= val.name %>" required>
                                         </td>
                                         <td>
-                                            <input type="text" class="form-control" name="gender" value="<%= val.gender %>" required>
+                                            <input type="text" class="form-control text-capitalize" name="gender" value="<%= val.gender %>" required>
                                         </td>
                                         <td>
                                         <input type="email" class="form-control" name="email" value="<%= val.email %>" required>

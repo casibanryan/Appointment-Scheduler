@@ -1,13 +1,12 @@
-
-
 <div class="col-12 col-lg-auto bg-sidebar sticky-top pe-0">
     <div class="d-flex flex-sm-column flex-row flex-nowrap bg-sidebar sticky-top pe-0">
-        <a href="/" class="fw-bold text-decoration-none h5 py-3 d-flex bg-sidebar-header text-white px-3">Appointment
+        <% if(user == 'admin') { %>
+            <a href="/" class="fw-bold text-decoration-none h5 py-3 d-flex bg-sidebar-header text-white px-3">Appointment
             System </a>
         <ul class="nav nav-pills nav-flush flex-lg-column flex-row flex-nowrap mb-auto">
 
             <!-- schedule clients-->
-            <li >
+            <li>
                 <a href="/" class="nav-link py-3 px-3 text-white sidebar-link" title="Schedule Clients"
                     data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Schedule clients">
                     <i class="bi bi-calendar-fill me-2"></i>
@@ -16,15 +15,16 @@
             </li>
             <!-- end of schedule clients -->
 
-            <!-- new clients-->
+    
+            <!-- new developer-->
             <li>
-                <a href="/new-client" class="nav-link py-3 px-3 text-white sidebar-link" title="New client"
-                    data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="New client">
-                    <i class="bi bi-person-plus-fill me-2"></i>
-                    New client
+                <a href="/new-developer" class="nav-link py-3 px-3 text-white sidebar-link" title="New developer"
+                    data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="New developer">
+                    <i class="bi bi-person-plus me-2"></i>
+                    New developer
                 </a>
             </li>
-            <!-- end of new clients -->
+            <!-- end of new developer -->
 
             <!-- manage clients-->
             <li>
@@ -35,7 +35,48 @@
                 </a>
             </li>
             <!-- end of manage clients -->
+            <!-- manage developers-->
+            <li>
+                <a href="/manage-developers" class="nav-link py-3 px-3 text-white sidebar-link"
+                    title="Manage developers" data-bs-toggle="tooltip" data-bs-placement="right"
+                    data-bs-original-title="Manage developers">
+                    <i class="bi bi-people me-2"></i>
+                    Manage developers
+                </a>
+            </li>
+            <!-- end of manage clients -->
+            <li>
+                <a href="/logout" class="nav-link py-3 px-3 text-white sidebar-link" title="logout" data-bs-toggle="tooltip"
+                    data-bs-placement="right" data-bs-original-title="logout">
+                    <i class="bi bi-box-arrow-left me-2"></i>
+                    Logout
+                </a>
+            </li>
 
         </ul>
+        <% } else { %>
+            <a href="/dashboard" class="fw-bold text-decoration-none h5 py-3 d-flex bg-sidebar-header text-white px-3">Appointment
+                Scheduler </a>
+            <ul class="nav nav-pills nav-flush flex-lg-column flex-row flex-nowrap mb-auto">
+            
+                <li>
+                    <a href="/dashboard" class="nav-link py-3 px-3 text-white sidebar-link" title="My Schedule" data-bs-toggle="tooltip"
+                        data-bs-placement="right" data-bs-original-title="My Schedule">
+                        <i class="bi bi-calendar-fill me-2"></i>
+                       My Schedule
+                    </a>
+                </li>
+            
+                <li>
+                    <a href="/logout" class="nav-link py-3 px-3 text-white sidebar-link" title="logout"
+                        data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="logout">
+                    <i class="bi bi-box-arrow-left me-2"></i>
+                        Logout
+                    </a>
+                </li>
+               
+            </ul>
+        <% } %>
+        
     </div>
 </div>

@@ -5,8 +5,13 @@
         "childrens",
         "middlewares",
         "Ochea",
+        "originalname",
         "refered",
+        "resave",
         "Resty",
-        "Swal"
-    ]
+        "Swal",
+        "uuidv",
+        "visayas"
+    ],
+    "liveServer.settings.port": 5501
 }
